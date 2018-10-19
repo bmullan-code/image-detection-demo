@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.image.detection.FileDemoApplication;
+import com.example.image.detection.ImageDetectionDemoApplication;
 import com.example.image.detection.payload.UploadFileResponse;
 import com.example.image.detection.queue.QueueMessage;
 import com.example.image.detection.service.FileStorageService;
@@ -53,7 +53,7 @@ public class FileController {
     @GetMapping("/queueInfo") 
     public String getQueueInfo() {
     		Gson gsonObj = new Gson();
-    		Properties props = rabbitAdmin.getQueueProperties(FileDemoApplication.QUEUE_OUT_NAME);
+    		Properties props = rabbitAdmin.getQueueProperties(ImageDetectionDemoApplication.QUEUE_OUT_NAME);
     		String strJson =  gsonObj.toJson(props);    		
     		return strJson;
     }
@@ -78,7 +78,7 @@ public class FileController {
         		encodedFile
     		);
         log.info("Sending message..." + message.getId());
-        rabbitTemplate.convertAndSend(FileDemoApplication.EXCHANGE_NAME, FileDemoApplication.ROUTING_IN_KEY, message);
+        rabbitTemplate.convertAndSend(ImageDetectionDemoApplication.EXCHANGE_NAME, ImageDetectionDemoApplication.ROUTING_IN_KEY, message);
         
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());

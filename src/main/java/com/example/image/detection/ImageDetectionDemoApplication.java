@@ -27,7 +27,7 @@ import com.example.image.detection.property.FileStorageProperties;
 @EnableConfigurationProperties({
 		FileStorageProperties.class
 })
-public class FileDemoApplication implements RabbitListenerConfigurer {
+public class ImageDetectionDemoApplication implements RabbitListenerConfigurer {
 	
 	public static final String EXCHANGE_NAME = "appExchange";
 	public static final String QUEUE_IN_NAME = "inboundImageQueue";
@@ -37,7 +37,7 @@ public class FileDemoApplication implements RabbitListenerConfigurer {
 
 
 	public static void main(String[] args) {
-		SpringApplication.run(FileDemoApplication.class, args);
+		SpringApplication.run(ImageDetectionDemoApplication.class, args);
 	}
 
 	@Bean

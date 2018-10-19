@@ -1,0 +1,16 @@
+applications:
+- name: image-producer
+  path: target/file-demo-0.0.1-SNAPSHOT.jar
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  disk_quota: 512M
+  random-route: true
+  services:
+  - rabbit-mq
+  stack: cflinuxfs2
+  env:
+    CONSUMER: false
+    PRODUCER: true
+    MANAGEMENT_HEALTH_JMS_ENABLED: false
+
