@@ -1,4 +1,4 @@
-package com.example.filedemo;
+package com.example.image.detection;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
