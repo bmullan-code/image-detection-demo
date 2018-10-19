@@ -1,4 +1,4 @@
-package com.example.filedemo.payload;
+package com.example.image.detection.payload;
 
 
 public class UploadFileResponse {

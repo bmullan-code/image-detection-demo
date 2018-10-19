@@ -1,20 +1,25 @@
-package com.example.filedemo.service;
+package com.example.image.detection.service;
 
-import com.example.filedemo.exception.FileStorageException;
-import com.example.filedemo.exception.MyFileNotFoundException;
-import com.example.filedemo.property.FileStorageProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
+
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.image.detection.exception.FileStorageException;
+import com.example.image.detection.exception.MyFileNotFoundException;
+import com.example.image.detection.property.FileStorageProperties;
 
 @Service
 public class FileStorageService {
@@ -53,6 +58,46 @@ public class FileStorageService {
         }
     }
 
+    public String fileAsBase64FullPath( String fullPath ) {
+		try {
+	    		byte[] fileContent = FileUtils.readFileToByteArray(new File(fullPath));
+	    		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+	    		return encodedString;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    public String fileAsBase64( String fileName ) {
+    		try {
+    			Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+    			
+        		byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath.toAbsolutePath().toString()));
+        		String encodedString = Base64.getEncoder().encodeToString(fileContent);
+        		return encodedString;
+   		} catch (Exception e) {
+			// TODO: handle exception
+   			e.printStackTrace();
+		}
+    		return null;
+    }
+    
+    public void writeBase64File(String fileName, String encodedFile) {
+    		try {
+    			Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+    			byte[] data = Base64.getDecoder().decode(encodedFile);
+    			FileUtils.writeByteArrayToFile(filePath.toFile(), data);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}   	
+    }
+
+    public String getFullPath(String fileName) {
+    		Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+    		return filePath.toString();
+    }
+    
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();

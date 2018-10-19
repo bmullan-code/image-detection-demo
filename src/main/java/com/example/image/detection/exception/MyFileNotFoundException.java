@@ -1,4 +1,4 @@
-package com.example.filedemo.exception;
+package com.example.image.detection.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

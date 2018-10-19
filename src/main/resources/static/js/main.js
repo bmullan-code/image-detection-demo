@@ -10,6 +10,22 @@ var multipleFileUploadInput = document.querySelector('#multipleFileUploadInput')
 var multipleFileUploadError = document.querySelector('#multipleFileUploadError');
 var multipleFileUploadSuccess = document.querySelector('#multipleFileUploadSuccess');
 
+//var socket = new WebSocket('wss://' + window.location.host + '/my-websocket-endpoint');
+
+//Add an event listener for when a connection is open
+//socket.onopen = function() {
+//	console.log('WebSocket connection opened. Ready to send messages.');
+//
+//	// Send a message to the server
+//	socket.send('Hello, from WebSocket client!');
+//};
+
+//Add an event listener for when a message is received from the server
+//socket.onmessage = function(message) {
+//	console.log('Message received from server: ' + message);
+//};
+
+
 function uploadSingleFile(file) {
     var formData = new FormData();
     formData.append("file", file);

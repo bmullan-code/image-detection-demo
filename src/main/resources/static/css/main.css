@@ -99,10 +99,17 @@ input[type="file"] {
     }
 }
 
+.row {
+    display: flex;
+}
+
+.image-container {
+	flex : 50%;
+}
 
 .upload-container {
       max-width: 750px;
-      margin-left: auto;
+      margin-left: 50px;
       margin-right: auto;
       background-color: #fff;
       box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
